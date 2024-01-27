@@ -63,14 +63,13 @@ class _HomeState extends State<Home> {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text("Flutter"),
+            Text("World"),
             Text(
               "News",
               style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
             )
           ],
         ),
-        centerTitle: true,
         elevation: 0.0,
         actions: [
           IconButton(
