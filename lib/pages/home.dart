@@ -1,4 +1,3 @@
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +13,6 @@ import '/services/news.dart';
 import '/services/slider_data.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-
 class Home extends StatefulWidget {
   const Home({super.key});
 
@@ -26,7 +24,7 @@ class _HomeState extends State<Home> {
   List<CategoryModel> categories = [];
   List<sliderModel> sliders = [];
   List<ArticleModel> articles = [];
-  bool _loading = true, loading2=true;
+  bool _loading = true, loading2 = true;
 
   int activeIndex = 0;
   @override
@@ -46,24 +44,28 @@ class _HomeState extends State<Home> {
     });
   }
 
-    getSlider() async {
-    Sliders slider= Sliders();
+  getSlider() async {
+    Sliders slider = Sliders();
     await slider.getSlider();
     sliders = slider.sliders;
-  setState(() {
-    loading2=false;
-  });
+    setState(() {
+      loading2 = false;
+    });
   }
-
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Text("World"),
+            Text(
+              "World",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
             Text(
               "News",
               style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
@@ -72,14 +74,20 @@ class _HomeState extends State<Home> {
         ),
         elevation: 0.0,
         actions: [
-          IconButton(
-            icon: Icon(Icons.search),
-            onPressed: () {
-              showSearch(
-                context: context,
-                delegate: NewsSearch(articles: articles),
-              );
-            },
+          Padding(
+            padding: const EdgeInsets.only(right: 12),
+            child: IconButton(
+              icon: Icon(
+                Icons.search,
+                size: 32,
+              ),
+              onPressed: () {
+                showSearch(
+                  context: context,
+                  delegate: NewsSearch(articles: articles),
+                );
+              },
+            ),
           ),
         ],
       ),
@@ -120,8 +128,12 @@ class _HomeState extends State<Home> {
                                 fontSize: 18.0),
                           ),
                           GestureDetector(
-                            onTap: (){
-                              Navigator.push(context, MaterialPageRoute(builder: (context)=> AllNews(news: "Breaking")));
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          AllNews(news: "Breaking")));
                             },
                             child: Text(
                               "View All",
@@ -139,23 +151,26 @@ class _HomeState extends State<Home> {
                     SizedBox(
                       height: 20.0,
                     ),
-                  loading2? Center(child: CircularProgressIndicator()):  CarouselSlider.builder(
-                        itemCount: 5,
-                        itemBuilder: (context, index, realIndex) {
-                          String? res = sliders[index].urlToImage;
-                          String? res1 = sliders[index].title;
-                          return buildImage(res!, index, res1!);
-                        },
-                        options: CarouselOptions(
-                            height: 250,
-                            autoPlay: true,
-                            enlargeCenterPage: true,
-                            enlargeStrategy: CenterPageEnlargeStrategy.height,
-                            onPageChanged: (index, reason) {
-                              setState(() {
-                                activeIndex = index;
-                              });
-                            })),
+                    loading2
+                        ? Center(child: CircularProgressIndicator())
+                        : CarouselSlider.builder(
+                            itemCount: 5,
+                            itemBuilder: (context, index, realIndex) {
+                              String? res = sliders[index].urlToImage;
+                              String? res1 = sliders[index].title;
+                              return buildImage(res!, index, res1!);
+                            },
+                            options: CarouselOptions(
+                                height: 250,
+                                autoPlay: true,
+                                enlargeCenterPage: true,
+                                enlargeStrategy:
+                                    CenterPageEnlargeStrategy.height,
+                                onPageChanged: (index, reason) {
+                                  setState(() {
+                                    activeIndex = index;
+                                  });
+                                })),
                     SizedBox(
                       height: 30.0,
                     ),
@@ -176,8 +191,12 @@ class _HomeState extends State<Home> {
                                 fontSize: 18.0),
                           ),
                           GestureDetector(
-                            onTap: (){
-                               Navigator.push(context, MaterialPageRoute(builder: (context)=> AllNews(news: "Trending")));
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          AllNews(news: "Trending")));
                             },
                             child: Text(
                               "View All",
@@ -202,7 +221,7 @@ class _HomeState extends State<Home> {
                           itemCount: articles.length,
                           itemBuilder: (context, index) {
                             return BlogTile(
-                              url:  articles[index].url!,
+                                url: articles[index].url!,
                                 desc: articles[index].description!,
                                 imageUrl: articles[index].urlToImage!,
                                 title: articles[index].title!);
@@ -221,10 +240,10 @@ class _HomeState extends State<Home> {
         ClipRRect(
           borderRadius: BorderRadius.circular(10),
           child: CachedNetworkImage(
-      
             height: 250,
             fit: BoxFit.cover,
-            width: MediaQuery.of(context).size.width, imageUrl: image,
+            width: MediaQuery.of(context).size.width,
+            imageUrl: image,
           ),
         ),
         Container(
@@ -265,8 +284,11 @@ class CategoryTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
-        Navigator.push(context, MaterialPageRoute(builder: (context)=> CategoryNews(name: categoryName)));
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => CategoryNews(name: categoryName)));
       },
       child: Container(
         margin: EdgeInsets.only(right: 16),
@@ -275,11 +297,10 @@ class CategoryTile extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(6),
               child: Image.asset(
-                 image,
+                image,
                 width: 120,
                 height: 70,
                 fit: BoxFit.cover,
-               
               ),
             ),
             Container(
@@ -307,13 +328,18 @@ class CategoryTile extends StatelessWidget {
 
 class BlogTile extends StatelessWidget {
   String imageUrl, title, desc, url;
-  BlogTile({required this.desc, required this.imageUrl, required this.title, required this.url});
+  BlogTile(
+      {required this.desc,
+      required this.imageUrl,
+      required this.title,
+      required this.url});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context)=> ArticleView(blogUrl:url )));
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => ArticleView(blogUrl: url)));
       },
       child: Container(
         margin: EdgeInsets.only(bottom: 10.0),
@@ -328,15 +354,14 @@ class BlogTile extends StatelessWidget {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  
                   Container(
                       child: ClipRRect(
                           borderRadius: BorderRadius.circular(10),
                           child: CachedNetworkImage(
-                      imageUrl: imageUrl,
+                            imageUrl: imageUrl,
                             height: 120,
                             width: 120,
-                            fit: BoxFit.cover, 
+                            fit: BoxFit.cover,
                           ))),
                   SizedBox(
                     width: 8.0,
