@@ -1,5 +1,3 @@
-
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import '/models/article_model.dart';
@@ -128,9 +126,40 @@ class AllNewsSection extends StatelessWidget {
             SizedBox(
               height: 20.0,
             ),
+            Row(
+              children: [
+                IconButton(
+                  icon: Icon(
+                    Icons.comment,
+                    size: 24,
+                    color: Colors.blue,
+                  ),
+                  onPressed: () {
+
+                  },
+                ),
+                IconButton(
+                  icon: Icon(
+                    Icons.share,
+                    size: 24,
+                    color: Colors.blue,
+                  ),
+                  onPressed: () {
+                  },
+                ),
+
+
+              ],
+            ),
+            SizedBox(
+              height: 20.0,
+            ),
           ],
         ),
       ),
     );
   }
+
 }
+
+

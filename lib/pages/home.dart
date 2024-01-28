@@ -327,7 +327,7 @@ class CategoryTile extends StatelessWidget {
 }
 
 class BlogTile extends StatelessWidget {
-  String imageUrl, title, desc, url;
+  final String imageUrl, title, desc, url;
   BlogTile(
       {required this.desc,
       required this.imageUrl,
@@ -366,32 +366,36 @@ class BlogTile extends StatelessWidget {
                   SizedBox(
                     width: 8.0,
                   ),
-                  Column(
+                  Row(
                     children: [
-                      Container(
-                        width: MediaQuery.of(context).size.width / 1.7,
-                        child: Text(
-                          title,
-                          maxLines: 2,
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.w500,
-                              fontSize: 17.0),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 7.0,
-                      ),
-                      Container(
-                        width: MediaQuery.of(context).size.width / 1.7,
-                        child: Text(
-                          desc,
-                          maxLines: 3,
-                          style: TextStyle(
-                              color: Colors.black54,
-                              fontWeight: FontWeight.w500,
-                              fontSize: 15.0),
-                        ),
+                      Column(
+                        children: [
+                          Container(
+                            width: MediaQuery.of(context).size.width / 1.7,
+                            child: Text(
+                              title,
+                              maxLines: 2,
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 17.0),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 7.0,
+                          ),
+                          Container(
+                            width: MediaQuery.of(context).size.width / 1.7,
+                            child: Text(
+                              desc,
+                              maxLines: 3,
+                              style: TextStyle(
+                                  color: Colors.black54,
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 15.0),
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),

@@ -96,6 +96,34 @@ class ShowCategory extends StatelessWidget {
             ),
             Text(desc, maxLines: 3,),
             SizedBox(height: 20.0,),
+            Row(
+              children: [
+                IconButton(
+                  icon: Icon(
+                    Icons.comment,
+                    size: 24,
+                    color: Colors.blue,
+                  ),
+                  onPressed: () {
+
+                  },
+                ),
+                IconButton(
+                  icon: Icon(
+                    Icons.share,
+                    size: 24,
+                    color: Colors.blue,
+                  ),
+                  onPressed: () {
+                  },
+                ),
+
+
+              ],
+            ),
+            SizedBox(
+              height: 20.0,
+            ),
           ],
         ),
       ),
